@@ -1,15 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import './ARViewer.css';
 
 function ARViewer({ product }) {
     const [isARMode, setIsARMode] = useState(false);
     const [isVRMode, setIsVRMode] = useState(false);
+    const [simple3DMode, setSimple3DMode] = useState(false); // No marker required
     const [currentView, setCurrentView] = useState('exterior');
+    const [markerType, setMarkerType] = useState('preset'); // 'preset' or 'pattern'
+    const [markerPreset, setMarkerPreset] = useState('hiro');
+    const [markerPatternUrl, setMarkerPatternUrl] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
-    const canvasRef = useRef(null);
-    const videoRef = useRef(null);
-    const animationRef = useRef(null);
+    const [objectRotation, setObjectRotation] = useState({ x: 0, y: 0 });
 
     // Lấy thông tin sản phẩm thực tế từ props
     const getProductComponents = (product) => {
@@ -60,174 +62,78 @@ function ARViewer({ product }) {
         setIsLoading(true);
         setError('');
         try {
+            // Wait for scripts to load
+            let retries = 0;
+            const maxRetries = 20;
+            
+            while (retries < maxRetries && !window.AFRAME) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+                retries++;
+            }
+            
+            console.log('AFRAME available:', !!window.AFRAME);
+            console.log('ARJS available:', !!(window.ARjs || window.ARJS));
+            
+            if (!window.AFRAME) {
+                throw new Error('A-Frame không thể tải. Vui lòng làm mới trang.');
+            }
+            
+            // Check for AR.js (may be ARjs or ARJS)
+            const arjsLoaded = window.ARjs || window.ARJS;
+            if (!arjsLoaded) {
+                throw new Error('AR.js chưa được tải. Kiểm tra kết nối internet.');
+            }
+            
             // Check if getUserMedia is supported
             if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
                 throw new Error('Camera không được hỗ trợ trên trình duyệt này');
             }
-
-            // Request camera permission
-            const stream = await navigator.mediaDevices.getUserMedia({ 
-                video: { 
-                    facingMode: 'environment',
-                    width: { ideal: 1280 },
-                    height: { ideal: 720 }
-                } 
-            });
             
-            if (videoRef.current) {
-                videoRef.current.srcObject = stream;
-                videoRef.current.play();
-            }
-            
+            console.log('Starting AR mode...');
             setIsARMode(true);
             setIsVRMode(false);
-            startAnimation();
+            setError('');
         } catch (error) {
-            console.error('Error accessing camera:', error);
-            setError(`Không thể truy cập camera: ${error.message}`);
+            console.error('Error starting AR:', error);
+            setError(error.message);
         }
         setIsLoading(false);
     };
 
-    const startVR = () => {
-        setIsVRMode(true);
-        setIsARMode(false);
+    const startVR = async () => {
+        setIsLoading(true);
         setError('');
         
-        // Check WebXR support
-        if ('xr' in navigator) {
-            navigator.xr.isSessionSupported('immersive-vr').then((supported) => {
-                if (supported) {
-                    console.log('VR được hỗ trợ');
-                } else {
-                    setError('VR không được hỗ trợ trên thiết bị này');
-                }
-            }).catch(() => {
-                setError('Không thể kiểm tra hỗ trợ VR');
-            });
-        } else {
-            setError('WebXR không được hỗ trợ');
+        try {
+            // Wait for A-Frame to load
+            let retries = 0;
+            const maxRetries = 20;
+            
+            while (retries < maxRetries && !window.AFRAME) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+                retries++;
+            }
+            
+            if (!window.AFRAME) {
+                throw new Error('A-Frame không thể tải. Vui lòng làm mới trang.');
+            }
+            
+            setIsVRMode(true);
+            setIsARMode(false);
+            setError('');
+        } catch (error) {
+            console.error('Error starting VR:', error);
+            setError(error.message);
         }
         
-        startAnimation();
+        setIsLoading(false);
     };
 
     const exitARVR = () => {
         setIsARMode(false);
         setIsVRMode(false);
         setError('');
-        
-        // Stop camera stream
-        if (videoRef.current && videoRef.current.srcObject) {
-            const tracks = videoRef.current.srcObject.getTracks();
-            tracks.forEach(track => track.stop());
-            videoRef.current.srcObject = null;
-        }
-        
-        // Stop animation
-        if (animationRef.current) {
-            cancelAnimationFrame(animationRef.current);
-        }
     };
-
-    const startAnimation = () => {
-        const animate = () => {
-            render3DModel();
-            animationRef.current = requestAnimationFrame(animate);
-        };
-        animate();
-    };
-
-    const render3DModel = () => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-
-        const ctx = canvas.getContext('2d');
-        const { width, height } = canvas;
-        
-        // Clear canvas
-        ctx.clearRect(0, 0, width, height);
-        
-        // Draw 3D model components with animation
-        const currentModel = currentModelData;
-        const time = Date.now() * 0.001;
-        
-        currentModel.components.forEach((component, index) => {
-            const x = width / 2 + component.position.x * 100;
-            const y = height / 2 + component.position.y * 100;
-            
-            // Add floating animation
-            const floatY = y + Math.sin(time + index) * 5;
-            const size = component.size + Math.sin(time * 2 + index) * 3;
-            
-            // Draw component with gradient
-            const gradient = ctx.createRadialGradient(x, floatY, 0, x, floatY, size);
-            gradient.addColorStop(0, component.color);
-            gradient.addColorStop(1, adjustColor(component.color, -30));
-            
-            ctx.fillStyle = gradient;
-            ctx.beginPath();
-            ctx.arc(x, floatY, size, 0, 2 * Math.PI);
-            ctx.fill();
-            
-            // Add border
-            ctx.strokeStyle = adjustColor(component.color, 20);
-            ctx.lineWidth = 2;
-            ctx.stroke();
-            
-            // Draw component name with background
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-            ctx.fillRect(x - 40, floatY + size + 5, 80, 20);
-            
-            ctx.fillStyle = '#fff';
-            ctx.font = '12px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText(component.name, x, floatY + size + 18);
-        });
-        
-        // Add connection lines for exploded view
-        if (currentView === 'exploded') {
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-            ctx.lineWidth = 1;
-            ctx.setLineDash([5, 5]);
-            
-            const centerX = width / 2;
-            const centerY = height / 2;
-            
-            currentModel.components.forEach(component => {
-                const x = centerX + component.position.x * 100;
-                const y = centerY + component.position.y * 100;
-                
-                ctx.beginPath();
-                ctx.moveTo(centerX, centerY);
-                ctx.lineTo(x, y);
-                ctx.stroke();
-            });
-            
-            ctx.setLineDash([]);
-        }
-    };
-
-    // Helper function to adjust color brightness
-    const adjustColor = (color, amount) => {
-        const num = parseInt(color.replace("#", ""), 16);
-        const r = Math.max(0, Math.min(255, (num >> 16) + amount));
-        const g = Math.max(0, Math.min(255, ((num >> 8) & 0x00FF) + amount));
-        const b = Math.max(0, Math.min(255, (num & 0x0000FF) + amount));
-        return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')}`;
-    };
-
-    useEffect(() => {
-        if (isARMode || isVRMode) {
-            startAnimation();
-        }
-        
-        return () => {
-            if (animationRef.current) {
-                cancelAnimationFrame(animationRef.current);
-            }
-        };
-    }, [isARMode, isVRMode, currentView]);
 
     return (
         <div className="ar-viewer">
@@ -273,6 +179,38 @@ function ARViewer({ product }) {
                     </div>
 
                     <div className="ar-vr-buttons">
+                        <div className="marker-controls">
+                            <label>View: </label>
+                            <select value={currentView} onChange={(e) => setCurrentView(e.target.value)}>
+                                <option value="exterior">Exterior view</option>
+                                <option value="interior">Interior view</option>
+                                <option value="exploded">Exploded view</option>
+                            </select>
+
+                            <label style={{marginLeft: 12}}>Marker type:</label>
+                            <select value={markerType} onChange={(e) => setMarkerType(e.target.value)}>
+                                <option value="preset">Preset (hiro)</option>
+                                <option value="pattern">Upload pattern (.patt)</option>
+                            </select>
+
+                            {markerType === 'preset' && (
+                                <select value={markerPreset} onChange={(e) => setMarkerPreset(e.target.value)}>
+                                    <option value="hiro">hiro</option>
+                                    <option value="kanji">kanji</option>
+                                </select>
+                            )}
+
+                            {markerType === 'pattern' && (
+                                <input type="file" accept=".patt" onChange={(e) => {
+                                    const file = e.target.files && e.target.files[0];
+                                    if (file) {
+                                        const url = URL.createObjectURL(file);
+                                        setMarkerPatternUrl(url);
+                                    }
+                                }} />
+                            )}
+                        </div>
+
                         <button 
                             className="ar-btn"
                             onClick={startAR}
@@ -304,36 +242,118 @@ function ARViewer({ product }) {
                                 </div>
                             ))}
                         </div>
+
+                        {/* Marker preview and download */}
+                        <div className="marker-preview">
+                            <h4>Marker dùng để thử (hiro)</h4>
+                            <p>In hoặc hiển thị marker này để camera có thể nhận diện và hiển thị mô hình.</p>
+                            <div className="marker-image-wrap">
+                                <img alt="hiro marker" src="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/hiro.png" style={{width: 150, height: 150, border: '1px solid #ccc'}} />
+                            </div>
+                            <a className="download-marker" href="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/hiro.png" target="_blank" rel="noreferrer">Tải marker (mở ảnh)</a>
+                        </div>
                     </div>
                 </div>
             ) : (
                 <div className="ar-vr-viewport">
                     {isARMode && (
-                        <div className="ar-viewport">
-                            <video 
-                                ref={videoRef}
-                                autoPlay 
-                                playsInline 
-                                muted
-                                className="camera-feed"
-                            />
-                            <canvas 
-                                ref={canvasRef}
-                                className="ar-overlay"
-                                width={640}
-                                height={480}
-                            />
+                        <div className="ar-viewport aframe-wrapper">
+                            {/* A-Frame + AR.js marker-based scene */}
+                            <a-scene 
+                                embedded 
+                                renderer="antialias: true; colorManagement: true; alpha: true;" 
+                                arjs="sourceType: webcam; debugUIEnabled: true; detectionMode: mono;"
+                                vr-mode-ui="enabled: false"
+                                stats
+                            >
+                                <a-assets>
+                                    {product?.modelUrl ? (
+                                        <a-asset-item id="productModel" src={product.modelUrl}></a-asset-item>
+                                    ) : null}
+                                </a-assets>
+
+                                {/* Add lighting for the scene */}
+                                <a-light type="ambient" color="#404040"></a-light>
+                                <a-light type="directional" position="0 1 0" rotation="-90 0 0"></a-light>
+
+                                {/* Add a helper grid to show AR is working */}
+                                <a-grid
+                                    visible="true"
+                                    opacity="0.5"
+                                    position="0 -1.5 0"
+                                    rotation="-90 0 0"
+                                    width="100"
+                                    height="100"
+                                    color="#CCC">
+                                </a-grid>
+
+                                {
+                                    markerType === 'preset' ? (
+                                        <a-marker preset={markerPreset} raycaster-listen>
+                                            {/* If product has a glTF model URL, render it; otherwise render a simple box */}
+                                            {product?.modelUrl ? (
+                                                <a-entity gltf-model="#productModel" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+                                            ) : product?.image ? (
+                                                <a-box position='0 0.5 0' depth='0.4' height='0.6' width='0.3' material={`src: ${product.image}`} rotation='0 45 0'></a-box>
+                                            ) : (
+                                                <>
+                                                    <a-box position='0 0.5 0' depth='0.4' height='0.6' width='0.3' color='#4CC3D9' rotation='0 45 0'></a-box>
+                                                    <a-sphere position='0 0.8 0' radius='0.1' color='#FF6B00'></a-sphere>
+                                                </>
+                                            )}
+                                            <a-text value={product?.name || 'Sản phẩm'} align='center' position='0 -0.6 0' color='#FFFFFF' width='3'></a-text>
+                                        </a-marker>
+                                    ) : (
+                                        markerPatternUrl ? (
+                                            <a-marker type="pattern" url={markerPatternUrl} raycaster-listen>
+                                                {product?.modelUrl ? (
+                                                    <a-entity gltf-model="#productModel" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+                                                ) : product?.image ? (
+                                                    <a-box position='0 0.5 0' depth='0.4' height='0.6' width='0.3' material={`src: ${product.image}`} rotation='0 45 0'></a-box>
+                                                ) : (
+                                                    <>
+                                                        <a-box position='0 0.5 0' depth='0.4' height='0.6' width='0.3' color='#4CC3D9' rotation='0 45 0'></a-box>
+                                                        <a-sphere position='0 0.8 0' radius='0.1' color='#FF6B00'></a-sphere>
+                                                    </>
+                                                )}
+                                                <a-text value={product?.name || 'Sản phẩm'} align='center' position='0 -0.6 0' color='#FFFFFF' width='3'></a-text>
+                                            </a-marker>
+                                        ) : (
+                                            <a-entity>
+                                                <a-text value="Vui lòng upload file .patt để sử dụng marker pattern" align='center' position='0 0 0' color='#FF0000' width='4'></a-text>
+                                            </a-entity>
+                                        )
+                                    )
+                                }
+                                <a-entity camera></a-entity>
+                            </a-scene>
                         </div>
                     )}
-                    
+
                     {isVRMode && (
-                        <div className="vr-viewport">
-                            <canvas 
-                                ref={canvasRef}
-                                className="vr-canvas"
-                                width={800}
-                                height={600}
-                            />
+                        <div className="vr-viewport aframe-wrapper">
+                            {/* A-Frame VR scene for simple 3D preview */}
+                            <a-scene embedded renderer="antialias: true; colorManagement: true;" webxr>
+                                <a-assets>
+                                    {product?.modelUrl ? (
+                                        <a-asset-item id="productModelVr" src={product.modelUrl}></a-asset-item>
+                                    ) : null}
+                                </a-assets>
+
+                                <a-entity position="0 1.6 3">
+                                    <a-entity rotation="0 -30 0">
+                                        {product?.modelUrl ? (
+                                            <a-entity gltf-model="#productModelVr" scale="0.8 0.8 0.8"></a-entity>
+                                        ) : product?.image ? (
+                                            <a-box position='0 0 0' depth='0.8' height='1.2' width='0.6' material={`src: ${product.image}`} ></a-box>
+                                        ) : (
+                                            <a-box position='0 0 0' depth='0.8' height='1.2' width='0.6' color='#4CC3D9'></a-box>
+                                        )}
+                                    </a-entity>
+                                </a-entity>
+                                <a-sky color="#ECECEC"></a-sky>
+                                <a-camera position="0 1.6 0"></a-camera>
+                            </a-scene>
                         </div>
                     )}
 
@@ -365,14 +385,31 @@ function ARViewer({ product }) {
                         </button>
                     </div>
 
-                    <div className="ar-vr-instructions">
-                        <h4>Hướng dẫn sử dụng:</h4>
-                        <ul>
-                            <li>Di chuyển thiết bị để xem các góc độ khác nhau</li>
-                            <li>Chạm vào các bộ phận để xem thông tin chi tiết</li>
-                            <li>Sử dụng các nút để chuyển đổi chế độ xem</li>
-                        </ul>
-                    </div>
+                    {isARMode && (
+                        <div className="ar-vr-instructions">
+                            <h4>📱 Hướng dẫn AR:</h4>
+                            <ul>
+                                <li>Hiển thị marker Hiro trước camera</li>
+                                <li>Đảm bảo ánh sáng đủ và marker rõ ràng</li>
+                                <li>Giữ khoảng cách 15-30cm từ marker</li>
+                                <li>Mô hình sẽ xuất hiện trên marker</li>
+                            </ul>
+                            <p style={{marginTop: '10px', fontSize: '0.9rem', color: '#fbbf24'}}>
+                                💡 Đang tìm marker... Di chuyển camera quanh marker Hiro
+                            </p>
+                        </div>
+                    )}
+
+                    {isVRMode && (
+                        <div className="ar-vr-instructions">
+                            <h4>🥽 Hướng dẫn VR:</h4>
+                            <ul>
+                                <li>Di chuyển thiết bị để xem các góc độ khác nhau</li>
+                                <li>Chạm vào các bộ phận để xem thông tin chi tiết</li>
+                                <li>Sử dụng các nút để chuyển đổi chế độ xem</li>
+                            </ul>
+                        </div>
+                    )}
                 </div>
             )}
 

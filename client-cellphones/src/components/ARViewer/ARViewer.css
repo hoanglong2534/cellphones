@@ -367,6 +367,104 @@
     font-weight: 500;
 }
 
+/* Marker Controls */
+.marker-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    align-items: center;
+    margin: var(--space-lg) 0;
+    padding: var(--space-lg);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+}
+
+.marker-controls label {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.marker-controls select {
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius-md);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.marker-controls input[type="file"] {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.9rem;
+}
+
+.marker-preview {
+    margin-top: var(--space-xl);
+    padding: var(--space-lg);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--gray-200);
+}
+
+.marker-preview h4 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.marker-preview p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: var(--space-md);
+}
+
+.marker-image-wrap {
+    display: flex;
+    justify-content: center;
+    margin: var(--space-md) 0;
+}
+
+.download-marker {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-md);
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    transition: all var(--transition-normal);
+}
+
+.download-marker:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.aframe-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.aframe-wrapper a-scene {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Ensure video element from AR.js is visible */
+.aframe-wrapper video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+}
+
+/* Make sure canvas is visible */
+.aframe-wrapper canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .ar-viewer {

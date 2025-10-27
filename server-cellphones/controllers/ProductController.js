@@ -222,3 +222,23 @@ export const BlogProduct = expressAsyncHandler(async (req, res) => {
         res.send({message: 'product not found'})
     }
 })
+
+export const UploadModel = expressAsyncHandler(async (req, res) => {
+    const product = await ProductModel.findById(req.params.id)
+    if (!product) {
+        res.status(404).send({ message: 'product not found' })
+        return
+    }
+
+    if (!req.file) {
+        res.status(400).send({ message: 'No model file uploaded' })
+        return
+    }
+
+    // Save accessible URL path for client: serve from /models/<filename>
+    const modelUrl = `/models/${req.file.filename}`
+    product.modelUrl = modelUrl
+    await product.save()
+
+    res.send({ message: 'Model uploaded', modelUrl })
+})

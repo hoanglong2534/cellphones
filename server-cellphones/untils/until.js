@@ -60,6 +60,29 @@ export const upload = multer({
   },
 });
 
+// Multer instance for uploading 3D model files (glTF / GLB)
+const modelsDir = path.join(process.cwd(), 'server-cellphones', 'public', 'models');
+export const uploadModel = multer({
+  storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, modelsDir);
+    },
+    filename: function (req, file, cb) {
+      const unique = Date.now() + '-' + Math.round(Math.random() * 1e9);
+      const ext = path.extname(file.originalname);
+      cb(null, `${unique}${ext}`);
+    }
+  }),
+  fileFilter: (req, file, cb) => {
+    const ext = path.extname(file.originalname).toLowerCase();
+    if (ext !== '.gltf' && ext !== '.glb') {
+      cb(new Error('Model file type not supported. Use .gltf or .glb'), false);
+      return;
+    }
+    cb(null, true);
+  }
+});
+
 export function PinComment(arr, fromIndex, toIndex) {
   var element = arr[fromIndex];
   arr.splice(fromIndex, 1);

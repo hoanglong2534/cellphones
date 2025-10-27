@@ -8,6 +8,7 @@ import {
 } from "../../../../actions/ProductAction";
 import { useHistory, useParams } from "react-router-dom";
 import { getAllSelectList } from "../../../../actions/SelectListAction";
+import axios from 'axios'
 
 function AdminUpdate(props) {
   const { register, handleSubmit } = useForm();
@@ -31,15 +32,38 @@ function AdminUpdate(props) {
 
   useEffect(() => {
     dispatch(getAllSelectList());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getAllSelectList());
-  }, []);
+  }, [dispatch]);
 
   const handleFileImageChange = (e) => {
     setImage(e.target.files[0]);
   };
+
+  const [modelFile, setModelFile] = useState(null)
+  const handleModelFileChange = (e) => {
+    setModelFile(e.target.files[0])
+  }
+
+  const handleUploadModel = async () => {
+    if (!modelFile) return alert('Please choose a model file (.gltf or .glb)')
+    try {
+      const form = new FormData()
+      form.append('model', modelFile)
+      await axios.post(`/products/upload-model/${id}`, form, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      })
+      alert('Model uploaded')
+      // refresh product detail
+      dispatch(getproductById(id))
+      setModelFile(null)
+    } catch (err) {
+      console.error(err)
+      alert(err.response && err.response.data && err.response.data.message ? err.response.data.message : 'Upload failed')
+    }
+  }
 
   const onSubmit = async (data) => {
     let formData = new FormData();
@@ -81,7 +105,7 @@ function AdminUpdate(props) {
       }
       onClick={() => HandleFilterProductByType(item.name)}
     >
-      <img src={item.img}></img>
+      <img src={item.img} alt={item.name || 'type'}></img>
     </div>
   );
 
@@ -148,6 +172,16 @@ function AdminUpdate(props) {
             {...register("image")}
             onChange={handleFileImageChange}
           ></input>
+          <div style={{marginTop: '12px'}}>
+            <label>3D Model (.gltf / .glb)</label>
+            <input type="file" accept=".gltf,.glb" onChange={handleModelFileChange}></input>
+            <button type="button" onClick={handleUploadModel}>Upload Model</button>
+            {detailProduct && detailProduct.modelUrl ? (
+              <div>
+                Current model: <a href={detailProduct.modelUrl} target="_blank" rel="noreferrer">{detailProduct.modelUrl}</a>
+              </div>
+            ) : null}
+          </div>
           <button type="submit">Update Product</button>
         </form>
       ) : (

@@ -6,6 +6,7 @@ import Samsung from '../components/HotSale/components/Samsung'
 import Xiaomi from '../components/HotSale/components/Xiaomi';
 import Footer from '../components/footer/Footer'
 import AppChat from '../components/AppChat/AppChat'
+import AIChatbot from '../components/AIChatbot/AIChatbot'
 import ScrollToTop from '../components/ScrollToTop/ScrollToTop'
 import { useSelector } from 'react-redux';
 
@@ -22,7 +23,12 @@ function HomePage(props) {
             <Footer></Footer>
             <ScrollToTop></ScrollToTop>
             {
-               userInfo && userInfo.isAdmin === false ? (<AppChat></AppChat>) : ""
+               userInfo && userInfo.isAdmin === false ? (
+                 <>
+                   <AppChat></AppChat>
+                   <AIChatbot></AIChatbot>
+                 </>
+               ) : ""
             }
         </div>
     );

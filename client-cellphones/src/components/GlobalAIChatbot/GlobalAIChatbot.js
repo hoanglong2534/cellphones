@@ -13,7 +13,6 @@ function GlobalAIChatbot() {
     ]);
     const [inputText, setInputText] = useState('');
     const [isTyping, setIsTyping] = useState(false);
-    const [sessionId] = useState(() => `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
     const messagesEndRef = useRef(null);
 
     const scrollToBottom = () => {
@@ -30,15 +29,15 @@ function GlobalAIChatbot() {
         
         try {
             // Call backend AI API
-            const response = await fetch('http://localhost:4000/api/chat', {
+            const response = await fetch('http://localhost:4000/genai/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    sessionId: sessionId,
-                    message: userMessage,
-                    productContext: null // Global context
+                    prompt: userMessage,
+                    temperature: 0.7,
+                    maxOutputTokens: 1024
                 })
             });
 
@@ -47,7 +46,9 @@ function GlobalAIChatbot() {
             }
 
             const data = await response.json();
-            return data.response;
+            return data?.data?.text || data?.data?.raw?.text ||
+                (data?.data?.raw?.candidates && data.data.raw.candidates.map(c=>c.output||'').join('\n')) ||
+                'Xin lỗi, tôi chưa nhận được phản hồi từ AI.';
             
         } catch (error) {
             console.error('AI API Error:', error);

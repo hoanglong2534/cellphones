@@ -13,10 +13,11 @@ import {
   RepCommentProduct,
   BlogProduct,
   PinCommentProduct,
+  UploadModel,
   filterProductByRandomField,
 } from "../controllers/ProductController.js";
 import { isAuth, isAdmin } from "../untils/until.js";
-import { upload } from "../untils/until.js";
+import { upload, uploadModel } from "../untils/until.js";
 
 const ProductRouter = express.Router();
 
@@ -57,6 +58,15 @@ ProductRouter.delete(
   // isAdmin,
   upload.single("image"),
   DeleteProduct
+);
+
+// Upload a 3D model (gltf / glb) and attach to product.modelUrl
+ProductRouter.post(
+  "/upload-model/:id",
+  // isAuth,
+  // isAdmin,
+  uploadModel.single("model"),
+  UploadModel
 );
 
 ProductRouter.get('/search/product', SearchProduct)
