@@ -29,7 +29,7 @@ function ARViewer({ product }) {
     useEffect(() => {
         const checkLibraries = () => {
             const aframeLoaded = !!window.AFRAME;
-            const arjsLoaded = !!(window.THREEx && window.THREEx.ArToolkitSource);
+            const arjsLoaded = !!(window.ARjs || (window.THREEx && window.THREEx.ArToolkitSource));
             
             if (aframeLoaded && arjsLoaded) {
                 setLibrariesLoaded(true);
@@ -69,7 +69,7 @@ function ARViewer({ product }) {
             const constraints = selectedDeviceId
                 ? { video: { deviceId: { exact: selectedDeviceId } } }
                 : { video: { facingMode: cameraFacing } };
-            const stream = await navigator.mediaDevices.getUserMedia(constraints);
+            const stream = await navigator.mediaDevices.getUserMedia({ ...constraints, audio: false });
             testStream.current = stream;
             if (testVideoRef.current) {
                 testVideoRef.current.srcObject = stream;
@@ -181,7 +181,8 @@ function ARViewer({ product }) {
             // Give AR.js a tick to attach video, then force a resize
             setTimeout(() => {
                 try { window.dispatchEvent(new Event('resize')); } catch {}
-            }, 300);
+                try { window.dispatchEvent(new Event('orientationchange')); } catch {}
+            }, 500);
         } catch (error) {
             if (error.name === 'NotAllowedError') {
                 setError('Vui lòng cho phép truy cập camera để sử dụng AR');
@@ -212,7 +213,8 @@ function ARViewer({ product }) {
             setIsARMode(false);
             setTimeout(() => {
                 try { window.dispatchEvent(new Event('resize')); } catch {}
-            }, 300);
+                try { window.dispatchEvent(new Event('orientationchange')); } catch {}
+            }, 500);
         } catch (error) {
             setError('Lỗi khởi tạo VR: ' + error.message);
         }

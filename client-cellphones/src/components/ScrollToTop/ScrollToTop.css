@@ -6,7 +6,7 @@
 
 }
 .scrolltotop{
-    background: #d70018;
+    background: var(--primary-color);
     color: white;
     font-size:20px;
     width: 45px;

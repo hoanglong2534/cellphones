@@ -17,19 +17,22 @@ const ARFeature = () => {
                             <div className="feature-item">
                                 <span className="feature-icon">📱</span>
                                 <div>
-                                    <strong>AR Mode:</strong> Xem sản phẩm trong thế giới thật
+                                    <strong>AR Mode:</strong>
+                                    <span className='blackText'> Xem sản phẩm trong thế giới thật</span>
                                 </div>
                             </div>
                             <div className="feature-item">
                                 <span className="feature-icon">🥽</span>
                                 <div>
-                                    <strong>VR Mode:</strong> Khám phá trong môi trường 3D
+                                    <strong>VR Mode:</strong> 
+                                    <span className='blackText'> Khám phá trong môi trường 3D</span>
                                 </div>
                             </div>
                             <div className="feature-item">
                                 <span className="feature-icon">🔧</span>
                                 <div>
-                                    <strong>3 View Modes:</strong> Bên ngoài, bên trong, tách rời
+                                    <strong>3 View Modes:</strong> 
+                                    <span className='blackText'> Bên ngoài, bên trong, tách rời</span>
                                 </div>
                             </div>
                         </div>

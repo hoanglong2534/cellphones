@@ -6,7 +6,7 @@ const ARTest = () => {
     const sampleProduct = {
         id: 1,
         name: "iPhone 15 Pro Max",
-        image: "https://via.placeholder.com/300x400/000000/FFFFFF?text=iPhone+15+Pro",
+        image: "https://source.unsplash.com/600x800/?iphone,apple,smartphone",
         modelUrl: null, // Có thể thêm URL model 3D thật nếu có
         price: 29990000,
         description: "Điện thoại iPhone 15 Pro Max mới nhất"

@@ -2,48 +2,18 @@ import React, { useState } from 'react';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import './StoresPage.css';
+import ImageWithFallback from '../components/ImageWithFallback';
 
 function StoresPage() {
     const [selectedCity, setSelectedCity] = useState('all');
 
     const cities = [
         { id: 'all', name: 'Tất Cả' },
-        { id: 'hcm', name: 'Hồ Chí Minh' },
         { id: 'hanoi', name: 'Hà Nội' },
-        { id: 'danang', name: 'Đà Nẵng' },
-        { id: 'cantho', name: 'Cần Thơ' },
         { id: 'haiphong', name: 'Hải Phòng' }
     ];
 
     const stores = [
-        {
-            id: 1,
-            name: 'PL Store Quận 1',
-            address: '123 Nguyễn Huệ, Quận 1, TP.HCM',
-            phone: '028.71.087.088',
-            hours: '8:00 - 22:00',
-            city: 'hcm',
-            services: ['Bán hàng', 'Bảo hành', 'Sửa chữa', 'Đổi trả'],
-            features: ['Parking', 'WiFi', 'ATM'],
-            rating: 4.8,
-            reviews: 1250,
-            image: 'https://via.placeholder.com/400x250/007AFF/FFFFFF?text=Store+Q1',
-            isMain: true
-        },
-        {
-            id: 2,
-            name: 'PL Store Quận 7',
-            address: '456 Nguyễn Thị Thập, Quận 7, TP.HCM',
-            phone: '028.71.087.089',
-            hours: '8:00 - 22:00',
-            city: 'hcm',
-            services: ['Bán hàng', 'Bảo hành', 'Sửa chữa'],
-            features: ['Parking', 'WiFi'],
-            rating: 4.6,
-            reviews: 890,
-            image: 'https://via.placeholder.com/400x250/34C759/FFFFFF?text=Store+Q7',
-            isMain: false
-        },
         {
             id: 3,
             name: 'PL Store Ba Đình',
@@ -55,7 +25,7 @@ function StoresPage() {
             features: ['Parking', 'WiFi', 'ATM'],
             rating: 4.7,
             reviews: 1100,
-            image: 'https://via.placeholder.com/400x250/FF9500/FFFFFF?text=Store+HN',
+            image: 'https://images.unsplash.com/photo-1505238680356-667803448bb6?q=80&w=1200&auto=format&fit=crop',
             isMain: true
         },
         {
@@ -69,35 +39,21 @@ function StoresPage() {
             features: ['Parking', 'WiFi'],
             rating: 4.5,
             reviews: 750,
-            image: 'https://via.placeholder.com/400x250/FF3B30/FFFFFF?text=Store+CG',
+            image: 'https://images.unsplash.com/photo-1487730116645-74489c95b41b?q=80&w=1200&auto=format&fit=crop',
             isMain: false
         },
         {
             id: 5,
-            name: 'PL Store Hải Châu',
-            address: '654 Lê Duẩn, Hải Châu, Đà Nẵng',
-            phone: '0236.71.087.088',
+            name: 'PL Store Lê Chân',
+            address: '12 Trần Nguyên Hãn, Lê Chân, Hải Phòng',
+            phone: '0225.71.087.088',
             hours: '8:00 - 22:00',
-            city: 'danang',
+            city: 'haiphong',
             services: ['Bán hàng', 'Bảo hành', 'Sửa chữa'],
             features: ['Parking', 'WiFi'],
             rating: 4.6,
             reviews: 650,
-            image: 'https://via.placeholder.com/400x250/5856D6/FFFFFF?text=Store+DN',
-            isMain: true
-        },
-        {
-            id: 6,
-            name: 'PL Store Ninh Kiều',
-            address: '987 Nguyễn Văn Cừ, Ninh Kiều, Cần Thơ',
-            phone: '0292.71.087.088',
-            hours: '8:00 - 22:00',
-            city: 'cantho',
-            services: ['Bán hàng', 'Bảo hành'],
-            features: ['Parking'],
-            rating: 4.4,
-            reviews: 420,
-            image: 'https://via.placeholder.com/400x250/AF52DE/FFFFFF?text=Store+CT',
+            image: 'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop',
             isMain: true
         }
     ];
@@ -107,6 +63,9 @@ function StoresPage() {
         : stores.filter(store => store.city === selectedCity);
 
     const mainStores = stores.filter(store => store.isMain);
+
+    const getMapsUrl = (address) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+    const getTelUrl = (phone) => `tel:${phone.replace(/\D/g, '')}`;
 
     return (
         <div className="stores-page">
@@ -146,7 +105,7 @@ function StoresPage() {
                         {mainStores.map(store => (
                             <div key={store.id} className="main-store-card">
                                 <div className="store-image">
-                                    <img src={store.image} alt={store.name} />
+                                    <ImageWithFallback src={store.image} alt={store.name} />
                                     <div className="main-badge">Cửa Hàng Chính</div>
                                 </div>
                                 <div className="store-content">
@@ -182,8 +141,8 @@ function StoresPage() {
                                     </div>
 
                                     <div className="store-actions">
-                                        <button className="directions-btn">Chỉ Đường</button>
-                                        <button className="call-btn">Gọi Ngay</button>
+                                        <a className="directions-btn" href={getMapsUrl(store.address)} target="_blank" rel="noreferrer">Chỉ Đường</a>
+                                        <a className="call-btn" href={getTelUrl(store.phone)}>Gọi Ngay</a>
                                     </div>
                                 </div>
                             </div>
@@ -216,7 +175,7 @@ function StoresPage() {
                         {filteredStores.map(store => (
                             <div key={store.id} className="store-card">
                                 <div className="store-image">
-                                    <img src={store.image} alt={store.name} />
+                                    <ImageWithFallback src={store.image} alt={store.name} />
                                 </div>
                                 <div className="store-content">
                                     <h3 className="store-name">{store.name}</h3>
@@ -241,8 +200,8 @@ function StoresPage() {
                                     </div>
 
                                     <div className="store-actions">
-                                        <button className="directions-btn">Chỉ Đường</button>
-                                        <button className="call-btn">Gọi</button>
+                                        <a className="directions-btn" href={getMapsUrl(store.address)} target="_blank" rel="noreferrer">Chỉ Đường</a>
+                                        <a className="call-btn" href={getTelUrl(store.phone)}>Gọi</a>
                                     </div>
                                 </div>
                             </div>

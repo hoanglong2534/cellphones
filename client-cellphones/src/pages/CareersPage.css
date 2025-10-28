@@ -361,6 +361,31 @@
     transform: translateY(-2px);
 }
 
+/* Apply Modal */
+.apply-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.apply-modal {
+    background: var(--bg-primary);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+    padding: var(--space-xl);
+    width: min(520px, 92vw);
+}
+
+.apply-modal h3 { margin-bottom: var(--space-sm); }
+.apply-modal p { color: var(--text-secondary); margin-bottom: var(--space-md); }
+.apply-modal input[type="file"] { margin-bottom: var(--space-lg); }
+.apply-modal .modal-actions { display: flex; gap: var(--space-md); justify-content: flex-end; }
+
 /* Company Culture */
 .company-culture {
     padding: var(--space-2xl) 0;

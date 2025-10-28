@@ -18,7 +18,7 @@
     margin-right: 1rem;
     padding: .5rem 0;
     background: white;
-    border: 1px solid #d70018;
+    border: 1px solid var(--primary-color);
     cursor: pointer;
 
     display: flex;
@@ -26,18 +26,18 @@
     align-items: center;
 }
 .myorder-menu-item.active{
-    background: #d70018; 
+    background: var(--primary-color); 
 }
 .myorder-menu-item a{
     padding: 0 1rem;
-    color: #d70018;
+    color: var(--primary-color);
     display: block;
 }
 .myorder-menu-item.active a{
    color: white;
 }
 .myorder-menu-item:hover{
-    background: #d70018;
+    background: var(--primary-color);
     transition: .3s;
 }
 .myorder-menu-item:hover a{
@@ -53,7 +53,7 @@
     height: 30px;
     width: 30px;
     border-radius: 50%;
-    background: #d70018;
+    background: var(--primary-color);
     color: white;
 
     text-align: center;

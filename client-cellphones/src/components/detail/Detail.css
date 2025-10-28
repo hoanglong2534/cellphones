@@ -89,9 +89,13 @@
 
 .detail-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) 520px; /* wider right column */
     gap: var(--space-2xl);
     align-items: start;
+}
+
+@media (max-width: 1140px) {
+    .detail-grid { grid-template-columns: 1fr; }
 }
 
 /* Image Gallery */
@@ -148,6 +152,11 @@
     gap: var(--space-sm);
     overflow-x: auto;
     padding: var(--space-xs) 0;
+}
+
+.thumbnail-images:empty,
+.thumbnail-images.hidden {
+    display: none;
 }
 
 .thumbnail {
@@ -390,9 +399,12 @@
 }
 
 .old-price {
-    color: var(--text-tertiary);
-    text-decoration: line-through;
-    font-size: 0.9rem;
+    color: #444;
+    display: inline-block;
+    white-space: normal;      /* allow wrapping */
+    max-width: 100%;
+    overflow: visible;        /* show full content */
+    text-overflow: unset;     /* no ellipsis */
 }
 
 .related-rating {
@@ -465,6 +477,10 @@
     background-color: #eee;
     border-radius: 7px;
     padding: 1rem;
+    overflow: hidden;
+    word-break: normal;
+    overflow-wrap: break-word;
+    min-height: 160px;   /* taller card to avoid cramped text */
 }
 
 .detail-intro table {
@@ -481,24 +497,27 @@
 
 .price-box {
     display: flex;
-    line-height: 30px;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    line-height: 1.4;
+    width: 100%;
 }
 
 .saleprice {
-    font-weight: 700;
+    font-weight: 800;
     color: var(--primary-color);
-    font-size: 20px;
-    margin-right: 1rem;
+    font-size: 28px;
+    white-space: nowrap;
 }
 
 .old-price {
     color: #444;
-    display: flex;
-}
-
-.old-price .price {
-    text-decoration: line-through;
-    color: #444;
+    display: inline-block;
+    white-space: normal;      /* allow wrapping */
+    max-width: 100%;
+    overflow: visible;        /* show full content */
+    text-overflow: unset;     /* no ellipsis */
 }
 
 .detail-info {
@@ -611,6 +630,10 @@
         margin-top: 1rem;
         padding: 0 0.5rem;
     }
+
+    .saleprice {
+        font-size: 24px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -636,5 +659,9 @@
     
     .detail-info-slide-image img {
         width: 270px;
+    }
+
+    .saleprice {
+        font-size: 22px;
     }
 }

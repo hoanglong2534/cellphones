@@ -86,15 +86,7 @@
     align-items: center;
 }
 
-.image-placeholder {
-    background: linear-gradient(135deg, var(--gray-100), var(--gray-200));
-    border-radius: var(--radius-xl);
-    padding: var(--space-2xl);
-    text-align: center;
-    box-shadow: var(--shadow-lg);
-    width: 100%;
-    max-width: 400px;
-}
+.story-image img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-xl); }
 
 .image-placeholder span {
     font-size: 4rem;
@@ -248,14 +240,10 @@
 .team-member p {
     color: var(--primary-color);
     font-weight: 600;
-    margin-bottom: var(--space-sm);
+    margin-bottom: var (--space-sm);
 }
 
-.team-member span {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    line-height: 1.4;
-}
+.team-member span { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.4; word-break: normal; overflow-wrap: normal; }
 
 /* Contact Info */
 .contact-info {
@@ -264,9 +252,27 @@
 }
 
 .contact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* Make the grid responsive and avoid overflow on narrow screens */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--space-xl);
+}
+
+/* Undo aggressive breaking on headings/paragraphs to avoid vertical letters */
+.contact-item h4,
+.contact-item p,
+.contact-item span {
+    white-space: normal;
+    overflow-wrap: normal;
+    word-break: normal;
+}
+
+/* Only apply safe breaking to long email/URL text */
+.contact-item a {
+    display: inline-block;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: break-word; /* break only when needed */
+    word-break: break-word;
 }
 
 .contact-item {
@@ -277,6 +283,12 @@
     box-shadow: var(--shadow-md);
     transition: all var(--transition-normal);
     border: 1px solid var(--gray-200);
+    /* Ensure no visual overflow from children */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
 }
 
 .contact-item:hover {
@@ -285,11 +297,34 @@
     border-color: var(--primary-color);
 }
 
-.contact-icon {
-    font-size: 3rem;
-    margin-bottom: var(--space-md);
-    display: block;
+/* Strong wrapping rules so long strings (emails, phones, addresses) never overflow the card */
+.contact-item h4,
+.contact-item p,
+/* removed anchor here to avoid per-character breaks on links */
+.contact-item span {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: break-word; /* wrap at word boundaries */
+    word-break: normal;         /* avoid breaking every character */
+    hyphens: auto;
 }
+
+/* Ensure headings like "Hotline", "Email", "Địa Chỉ" never break per character */
+.contact-item h4 { white-space: nowrap; }
+
+/* Fix links so they don't wrap per character and truncate gracefully on small widths */
+.contact-item a {
+    color: var(--primary-color);
+    text-decoration: none;
+    max-width: 100%;
+    white-space: nowrap;        /* keep email/phone on one line */
+    overflow: hidden;           /* prevent overflow outside card */
+    text-overflow: ellipsis;    /* gracefully truncate on very narrow screens */
+}
+
+/* Remove previously conflicting override for links (kept for reference)
+   .contact-item a { white-space: normal; overflow-wrap: anywhere; word-break: normal; }
+*/
 
 .contact-item h4 {
     color: var(--text-primary);
@@ -298,13 +333,7 @@
     margin-bottom: var(--space-sm);
 }
 
-.contact-item p {
-    color: var(--primary-color);
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin-bottom: var(--space-sm);
-}
-
+.contact-item p { color: var(--primary-color); font-weight: 600; font-size: 1.1rem; margin-bottom: var(--space-sm); word-break: normal; overflow-wrap: normal; }
 .contact-item span {
     color: var(--text-secondary);
     font-size: 0.9rem;
@@ -350,9 +379,7 @@
         grid-template-columns: repeat(2, 1fr);
     }
     
-    .contact-grid {
-        grid-template-columns: 1fr;
-    }
+    .contact-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
