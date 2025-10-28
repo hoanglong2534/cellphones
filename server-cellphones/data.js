@@ -12,9 +12,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -29,9 +29,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -46,9 +46,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -63,9 +63,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -80,9 +80,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -97,9 +97,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -114,9 +114,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -131,9 +131,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -148,9 +148,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -165,9 +165,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -182,9 +182,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -199,9 +199,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -216,9 +216,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -233,9 +233,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -250,9 +250,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -267,9 +267,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -284,9 +284,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -301,9 +301,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -318,9 +318,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -335,9 +335,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -352,9 +352,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -369,9 +369,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         },
@@ -386,9 +386,9 @@ export const data = {
             "numReviews": 1,
             "reviews": [
                 {
-                    "name": "cao kha hieu",
+                    "name": "Khách hàng ẩn danh",
                     "star": 5,
-                    "comment": "ngon",
+                    "comment": "Sản phẩm tốt",
                 }
             ]
         }

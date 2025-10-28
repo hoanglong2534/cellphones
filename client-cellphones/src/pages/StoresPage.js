@@ -18,7 +18,7 @@ function StoresPage() {
     const stores = [
         {
             id: 1,
-            name: 'Cellphones Quận 1',
+            name: 'PL Store Quận 1',
             address: '123 Nguyễn Huệ, Quận 1, TP.HCM',
             phone: '028.71.087.088',
             hours: '8:00 - 22:00',
@@ -32,7 +32,7 @@ function StoresPage() {
         },
         {
             id: 2,
-            name: 'Cellphones Quận 7',
+            name: 'PL Store Quận 7',
             address: '456 Nguyễn Thị Thập, Quận 7, TP.HCM',
             phone: '028.71.087.089',
             hours: '8:00 - 22:00',
@@ -46,7 +46,7 @@ function StoresPage() {
         },
         {
             id: 3,
-            name: 'Cellphones Ba Đình',
+            name: 'PL Store Ba Đình',
             address: '789 Láng Hạ, Ba Đình, Hà Nội',
             phone: '024.71.087.088',
             hours: '8:00 - 22:00',
@@ -60,7 +60,7 @@ function StoresPage() {
         },
         {
             id: 4,
-            name: 'Cellphones Cầu Giấy',
+            name: 'PL Store Cầu Giấy',
             address: '321 Cầu Giấy, Cầu Giấy, Hà Nội',
             phone: '024.71.087.089',
             hours: '8:00 - 22:00',
@@ -74,7 +74,7 @@ function StoresPage() {
         },
         {
             id: 5,
-            name: 'Cellphones Hải Châu',
+            name: 'PL Store Hải Châu',
             address: '654 Lê Duẩn, Hải Châu, Đà Nẵng',
             phone: '0236.71.087.088',
             hours: '8:00 - 22:00',
@@ -88,7 +88,7 @@ function StoresPage() {
         },
         {
             id: 6,
-            name: 'Cellphones Ninh Kiều',
+            name: 'PL Store Ninh Kiều',
             address: '987 Nguyễn Văn Cừ, Ninh Kiều, Cần Thơ',
             phone: '0292.71.087.088',
             hours: '8:00 - 22:00',
@@ -118,7 +118,7 @@ function StoresPage() {
                     <div className="hero-content">
                         <h1 className="hero-title">Hệ Thống Cửa Hàng</h1>
                         <p className="hero-subtitle">
-                            Tìm cửa hàng Cellphones gần nhất và trải nghiệm dịch vụ tốt nhất
+                            Tìm cửa hàng PL Store gần nhất và trải nghiệm dịch vụ tốt nhất
                         </p>
                         <div className="hero-stats">
                             <div className="stat">
@@ -300,7 +300,7 @@ function StoresPage() {
                         <div className="contact-item">
                             <div className="contact-icon">📧</div>
                             <h3>Email</h3>
-                            <p>support@cellphones.com.vn</p>
+                            <p>support@plstore.vn</p>
                             <span>Phản hồi trong 24h</span>
                         </div>
                     </div>

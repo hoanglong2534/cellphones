@@ -76,7 +76,7 @@
     display: flex;
     justify-content: flex-start;
     font-size: 14px;
-    color: #e11b1e;
+    color: var(--primary-color);
 }
 .shopping-cart-list-product-bottom{
    
@@ -84,7 +84,7 @@
     margin-top: 1rem;
 }
 .shopping-cart-list-product-bottom button{
-    color: #d70018;
+    color: var(--primary-color);
     font-size: 15px;
     border: none;
     background: none;

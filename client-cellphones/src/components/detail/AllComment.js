@@ -48,7 +48,7 @@ function AllComment(props) {
               <div style={{ display: "flex" }}>
                 {comment.isAdmin ? (
                   <div className="all-comment-info-name admin">
-                    <img src="https://cellphones.com.vn/skin/frontend/default/cpsdesktop/images/media/logo.png"></img>
+                    <span>PL</span>
                   </div>
                 ) : (
                   <div className="all-comment-info-name">
@@ -93,7 +93,7 @@ function AllComment(props) {
                 className="all-comment-more-chat"
                 onClick={() => showRepComment(comment._id)}
               >
-                <WechatOutlined style={{ color: "#e11b1e" }} /> <p> Trả lời</p>
+                <WechatOutlined style={{ color: "var(--primary-color)" }} /> <p> Trả lời</p>
               </a>
             </div>
             {comment.replies.length > 0 ? (
@@ -123,7 +123,7 @@ function AllComment(props) {
                 style={{ display: "flex", alignItems: "center" }}
               >
                 <textarea
-                  placeholder="Xin mời để lại câu hỏi, CellphoneS sẽ trả lời trong 1h từ 8h - 22h mỗi ngày."
+                  placeholder="Xin mời để lại câu hỏi, PL Store sẽ trả lời trong 1h từ 8h - 22h mỗi ngày."
                   rows={10}
                   cols={3}
                   vaule={repValue}
@@ -140,19 +140,19 @@ function AllComment(props) {
           )}
         </>
       ))}
-      {/* <Col span={18}>
+      <Col span={18}>
             <div className="all-comment-info">
               <div className="all-comment-info-name">
                 C
               </div>
-              <strong>Cao Kha Hieu</strong>
+              <strong>Khách hàng ẩn danh</strong>
             </div>
             <div className="all-comment-content">
               Ip 11 này là loại đầy đủ phụ kiện hay loại mới ko pk đi kèm thế shop
             </div>
             <div className="all-comment-more">
               <a className="all-comment-more-chat" onClick={() => showRepComment()}>
-                <WechatOutlined style={{color: '#e11b1e'}}/> <p> Trả lời</p>
+                <WechatOutlined style={{color: 'var(--primary-color)'}}/> <p> Trả lời</p>
               </a>
             </div>
             <div className="all-comment-rep-list">
@@ -162,7 +162,7 @@ function AllComment(props) {
                   <div className="all-comment-info-name">
                     C
                   </div>
-                  <strong>Cao Kha Hieu</strong>
+                  <strong>Khách hàng ẩn danh</strong>
                 </div>
 
                 <div className="all-comment-content">
@@ -171,7 +171,7 @@ function AllComment(props) {
 
                 <div className="all-comment-more">
                   <a className="all-comment-more-chat">
-                    <WechatOutlined style={{color: '#e11b1e'}}/> <p> Trả lời</p>
+                    <WechatOutlined style={{color: 'var(--primary-color)'}}/> <p> Trả lời</p>
                   </a>
                 </div>
                 
@@ -182,7 +182,7 @@ function AllComment(props) {
                   <div className="all-comment-info-name">
                     C
                   </div>
-                  <strong>Cao Kha Hieu</strong>
+                  <strong>Khách hàng ẩn danh</strong>
                 </div>
 
                 <div className="all-comment-content">
@@ -191,7 +191,7 @@ function AllComment(props) {
 
                 <div className="all-comment-more">
                   <a className="all-comment-more-chat">
-                    <WechatOutlined style={{color: '#e11b1e'}}/> <p> Trả lời</p>
+                    <WechatOutlined style={{color: 'var(--primary-color)'}}/> <p> Trả lời</p>
                   </a>
                 </div>
                 
@@ -202,13 +202,13 @@ function AllComment(props) {
             repCmt.status === true ? (
             <Col span={18} align='start' style={{ alignItems:'center'}}>
             <div className="comment-area" style={{display: 'flex', alignItems:'center'}}>
-              <textarea placeholder='Xin mời để lại câu hỏi, CellphoneS sẽ trả lời trong 1h từ 8h - 22h mỗi ngày.' rows={10} cols={3}></textarea>
+              <textarea placeholder='Xin mời để lại câu hỏi, PL Store sẽ trả lời trong 1h từ 8h - 22h mỗi ngày.' rows={10} cols={3}></textarea>
             </div>
             <div className="comment-send">
               <button>Trả lời</button>
             </div>
           </Col>) : ''
-          } */}
+          }
     </div>
   );
 }

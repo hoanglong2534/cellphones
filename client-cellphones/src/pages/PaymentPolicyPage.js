@@ -14,7 +14,7 @@ function PaymentPage() {
                     <div className="hero-content">
                         <h1 className="hero-title">Chính Sách Thanh Toán</h1>
                         <p className="hero-subtitle">
-                            Các phương thức thanh toán an toàn và tiện lợi tại Cellphones
+                            Các phương thức thanh toán an toàn và tiện lợi tại PL Store
                         </p>
                     </div>
                 </div>
@@ -93,7 +93,7 @@ function PaymentPage() {
                                         <h3>Ngân hàng Vietcombank</h3>
                                         <div className="account-details">
                                             <p><strong>Số tài khoản:</strong> 1234567890</p>
-                                            <p><strong>Chủ tài khoản:</strong> CÔNG TY TNHH CELLPHONES</p>
+                                            <p><strong>Chủ tài khoản:</strong> CÔNG TY TNHH PL STORE</p>
                                             <p><strong>Chi nhánh:</strong> Hồ Chí Minh</p>
                                         </div>
                                     </div>
@@ -105,7 +105,7 @@ function PaymentPage() {
                                         <h3>Ngân hàng BIDV</h3>
                                         <div className="account-details">
                                             <p><strong>Số tài khoản:</strong> 0987654321</p>
-                                            <p><strong>Chủ tài khoản:</strong> CÔNG TY TNHH CELLPHONES</p>
+                                            <p><strong>Chủ tài khoản:</strong> CÔNG TY TNHH PL STORE</p>
                                             <p><strong>Chi nhánh:</strong> Hà Nội</p>
                                         </div>
                                     </div>
@@ -117,7 +117,7 @@ function PaymentPage() {
                                         <h3>Ngân hàng Techcombank</h3>
                                         <div className="account-details">
                                             <p><strong>Số tài khoản:</strong> 1122334455</p>
-                                            <p><strong>Chủ tài khoản:</strong> CÔNG TY TNHH CELLPHONES</p>
+                                            <p><strong>Chủ tài khoản:</strong> CÔNG TY TNHH PL STORE</p>
                                             <p><strong>Chi nhánh:</strong> Đà Nẵng</p>
                                         </div>
                                     </div>
@@ -236,7 +236,7 @@ function PaymentPage() {
                                     <div className="contact-icon">📧</div>
                                     <div className="contact-details">
                                         <h3>Email Hỗ Trợ</h3>
-                                        <p>payment@cellphones.com.vn</p>
+                                        <p>payment@plstore.vn</p>
                                         <span>Phản hồi trong 24h</span>
                                     </div>
                                 </div>

@@ -239,7 +239,7 @@ function VoucherPage() {
                                     <div className="contact-icon">📧</div>
                                     <div className="contact-details">
                                         <h3>Email Hỗ Trợ</h3>
-                                        <p>promotion@cellphones.com.vn</p>
+                                        <p>promotion@plstore.vn</p>
                                         <span>Phản hồi trong 24h</span>
                                     </div>
                                 </div>

@@ -14,7 +14,7 @@ function ReturnPage() {
                     <div className="hero-content">
                         <h1 className="hero-title">Chính Sách Đổi Trả</h1>
                         <p className="hero-subtitle">
-                            Thông tin chi tiết về chính sách đổi trả và hoàn tiền tại Cellphones
+                            Thông tin chi tiết về chính sách đổi trả và hoàn tiền tại PL Store
                         </p>
                     </div>
                 </div>
@@ -65,7 +65,7 @@ function ReturnPage() {
                                         <p>Gọi hotline hoặc gửi email để thông báo về việc đổi trả</p>
                                         <div className="step-details">
                                             <span>📞 Hotline: 028.71.087.088</span>
-                                            <span>📧 Email: support@cellphones.com.vn</span>
+                                            <span>📧 Email: support@plstore.vn</span>
                                         </div>
                                     </div>
                                 </div>
@@ -270,7 +270,7 @@ function ReturnPage() {
                                     <div className="contact-icon">📧</div>
                                     <div className="contact-details">
                                         <h3>Email Hỗ Trợ</h3>
-                                        <p>return@cellphones.com.vn</p>
+                                        <p>return@plstore.vn</p>
                                         <span>Phản hồi trong 24h</span>
                                     </div>
                                 </div>

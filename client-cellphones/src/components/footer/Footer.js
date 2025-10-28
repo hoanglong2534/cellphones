@@ -8,10 +8,10 @@ function Footer(props) {
             <div className="footer">
                 <div className="footer-top">
                     <div className="footer-top-name">
-                        <h2>cellphones</h2>
+                        <h2>pl store</h2>
                     </div>
                     <div className="footer-top-about">
-                        <h2>Cellphones</h2>
+                        <h2>PL Store</h2>
                         <ul>
                             <li>
                                 <Link to="/about">Về Chúng Tôi</Link>
@@ -42,7 +42,7 @@ function Footer(props) {
                                 <Link to="/shipping">Phương thức giao hàng</Link>
                             </li>
                             <li>
-                                <Link to="/payment">Thanh toán</Link>
+                                <Link to="/payment-policy">Thanh toán</Link>
                             </li>
                             <li>
                                 <Link to="/voucher">Mã giảm giá</Link>
@@ -54,7 +54,7 @@ function Footer(props) {
                     </div>
                 </div>
                 <div className="footer-bot">
-                    <p>Copyright © 2023 Cellphones. All rights reserved.</p>
+                    <p>Copyright © 2025 PL Store. All rights reserved.</p>
                 </div>
             </div>
         </section>

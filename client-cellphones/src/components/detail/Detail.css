@@ -486,7 +486,7 @@
 
 .saleprice {
     font-weight: 700;
-    color: #e11b1e;
+    color: var(--primary-color);
     font-size: 20px;
     margin-right: 1rem;
 }
@@ -508,8 +508,8 @@
 }
 
 .detail-info-right-buy-now a {
-    background: linear-gradient(#f52f32, #e11b1e);
-    border: solid 1px #e11b1e;
+    background: linear-gradient(var(--primary-light), var(--primary-color));
+    border: solid 1px var(--primary-color);
     margin-top: 10px;
     color: #fff;
     font-size: 14px;
@@ -525,7 +525,7 @@
 
 .detail-info-right-buy-now a:hover {
     background: #fff;
-    color: #e11b1e;
+    color: var(--primary-color);
     text-decoration: none;
 }
 

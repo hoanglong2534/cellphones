@@ -14,7 +14,7 @@ function ShippingPage() {
                     <div className="hero-content">
                         <h1 className="hero-title">Phương Thức Giao Hàng</h1>
                         <p className="hero-subtitle">
-                            Thông tin chi tiết về các phương thức giao hàng của Cellphones
+                            Thông tin chi tiết về các phương thức giao hàng của PL Store
                         </p>
                     </div>
                 </div>
@@ -197,7 +197,7 @@ function ShippingPage() {
                                     <div className="contact-icon">📧</div>
                                     <div className="contact-details">
                                         <h3>Email Hỗ Trợ</h3>
-                                        <p>delivery@cellphones.com.vn</p>
+                                        <p>delivery@plstore.vn</p>
                                         <span>Phản hồi trong 24h</span>
                                     </div>
                                 </div>

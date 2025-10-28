@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/cellphones_ar_ai', {
+mongoose.connect('mongodb://localhost:27017/plstore_ar_ai', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
@@ -395,7 +395,7 @@ async function generateAIResponse(message, productContext) {
             rating: p.rating
         }));
 
-        const systemPrompt = `Bạn là AI Assistant chuyên gia của Cellphones - cửa hàng điện thoại hàng đầu Việt Nam.
+        const systemPrompt = `Bạn là AI Assistant chuyên gia của PL Store - cửa hàng điện thoại hàng đầu Việt Nam.
 
 DANH SÁCH SẢN PHẨM HIỆN CÓ:
 ${JSON.stringify(productsList, null, 2)}

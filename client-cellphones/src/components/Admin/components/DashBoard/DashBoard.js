@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import {
   BellOutlined,
   SearchOutlined,
@@ -6,11 +7,14 @@ import {
   ShoppingOutlined,
   DollarCircleOutlined,
   FileTextOutlined,
+  HomeOutlined,
 } from "@ant-design/icons";
 import "./DashBoard.css";
 import ChartDashBoard from "./ChartDashBoard";
 
 export default function DashBoard() {
+  const { userInfo } = useSelector((state) => state.userSignin) || {};
+  const displayName = userInfo?.name || "Admin";
   return (
     <section id="dashboard">
       <div className="dashboard">
@@ -26,10 +30,15 @@ export default function DashBoard() {
           <div className="dashboard-top-content">
             <li className="dashboard-top-content-avatar">
               <img src="https://res.cloudinary.com/caokhahieu/image/upload/v1626334932/gediogbkwlg85kbbsamq.jpg"></img>
-              <span>Cao Kha Hieu</span>
+              <span>{displayName}</span>
             </li>
             <li className="dashboard-top-content-bell">
               <BellOutlined></BellOutlined>
+            </li>
+            <li className="dashboard-top-content-bell">
+              <a href="/" className="btn btn-secondary" style={{display:'inline-flex', alignItems:'center', gap:6}}>
+                <HomeOutlined /> Về trang chủ
+              </a>
             </li>
           </div>
         </div>

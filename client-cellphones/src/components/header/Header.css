@@ -203,7 +203,7 @@
     height: 40px;
     line-height: 21px;
     text-align: center;
-    background: #d70018;
+    background: var(--primary-color);
     color: white;
     border: none;
     padding: 5px;

@@ -152,7 +152,7 @@ function AboutPage() {
                         <div className="contact-item">
                             <div className="contact-icon">📧</div>
                             <h4>Email</h4>
-                            <p>support@cellphones.com.vn</p>
+                            <p>support@plstore.vn</p>
                             <span>Phản hồi trong 24h</span>
                         </div>
                         <div className="contact-item">

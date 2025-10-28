@@ -43,9 +43,8 @@ function Header(props) {
   return (
     <div className="header">
       <section id="menu">
-        <div className="logo">
-          <span>
-            <Link to="/"> CELLPHONES </Link>
+        <div className="logo">          <span>
+            <Link to="/"> PL STORE </Link>
           </span>
         </div>
         <div className="search">
@@ -60,13 +59,17 @@ function Header(props) {
             <SearchOutlined onClick={(e) => SearchProduct(e)}></SearchOutlined>
             {/* <button type="submit" onClick={(e) => SearchProduct(e)}>Search</button> */}
           </form>
-        </div>
-        <ul className="menu-list" id={menu ? "hidden" : ""}>
+        </div>        <ul className="menu-list" id={menu ? "hidden" : ""}>
           <li className="active">
             <Link to="/"> Trang Chủ </Link>
           </li>
           <li>
             <Link to="/product"> Sản Phẩm </Link>
+          </li>
+          <li>
+            <Link to="/ar-experience"> 
+              <span style={{color: '#ff6b35', fontWeight: '600'}}>🚀 AR/VR</span>
+            </Link>
           </li>
           {userInfo ? (
             <li onClick={() => setShowAccount2(!showAccount2)}>

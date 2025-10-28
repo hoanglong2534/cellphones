@@ -2,10 +2,10 @@
 
 :root {
   /* Color Palette */
-  --primary-color: #d70018;
-  --primary-dark: #b30015;
-  --primary-light: #ff1a33;
-  --secondary-color: #2563eb;
+  --primary-color: #2563eb; /* Blue 600 */
+  --primary-dark: #1e40af;  /* Blue 800 */
+  --primary-light: #60a5fa; /* Blue 400 */
+  --secondary-color: #0ea5e9; /* Sky 500 */
   --accent-color: #f59e0b;
   --success-color: #10b981;
   --warning-color: #f59e0b;
@@ -25,8 +25,8 @@
   
   /* Background Colors */
   --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
-  --bg-tertiary: #f1f5f9;
+  --bg-secondary: #f8fafc; /* keep subtle bluish gray */
+  --bg-tertiary: #eef6ff;  /* softer blue tint */
   
   /* Text Colors */
   --text-primary: #1f2937;

@@ -6,7 +6,7 @@ import AdminCreate from './AdminProduct/AdminCreate'
 import AdminUpdate from './AdminProduct/AdminUpdate'
 import AdminOrder from './AdminOrder/AdminOrder'
 import AdminUser from './AdminUser/AdminUser';
-import AppChat from './AppChat/AppChat'
+// import AppChat from './AppChat/AppChat'
 import ReviewProduct from './AdminProduct/ReviewProduct/ReviewProduct';
 import DataFilterProduct from './AdminProduct/DataFilterProduct/DataFilterProduct';
 
@@ -23,7 +23,7 @@ function Routes(props) {
             <Route path='/admin/product' component={AdminProduct}/>
 
             <Route path='/admin/order' component={AdminOrder}/>
-            <Route path='/admin/chat' component={AppChat}/>
+            {/* <Route path='/admin/chat' component={AppChat}/> */}
         </Switch>
     );
 }

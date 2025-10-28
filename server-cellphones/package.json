@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "Cellphones AR/VR & AI Server",
+  "description": "PL Store AR/VR & AI Server",
   "main": "ar-ai-server.js",
   "type": "module",
   "scripts": {

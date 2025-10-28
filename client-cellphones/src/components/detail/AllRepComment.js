@@ -13,7 +13,8 @@ function AllRepComment(props) {
             <div className="all-comment-info">
               {repComment.isAdmin ? (
                 <div className="all-comment-info-name admin">
-                  <img src="https://cellphones.com.vn/skin/frontend/default/cpsdesktop/images/media/logo.png"></img>
+                  {/* Rebrand: use initials instead of external logo */}
+                  <span>PL</span>
                 </div>
               ) : (
                 <div className="all-comment-info-name">
@@ -33,7 +34,7 @@ function AllRepComment(props) {
                 className="all-comment-more-chat"
                 onClick={() => showRepComment(id)}
               >
-                <WechatOutlined style={{ color: "#e11b1e" }} /> <p> Trả lời</p>
+                <WechatOutlined style={{ color: "var(--primary-color)" }} /> <p> Trả lời</p>
               </a>
             </div>
           </div>
