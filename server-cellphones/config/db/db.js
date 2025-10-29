@@ -5,8 +5,7 @@ dotenv.config()
 
 async function connectDB(){
 
-    // const url = 'mongodb://localhost:27017/shop_phone'
-    const url = 'mongodb+srv://CaoKhaHieu:CaoKhaHieu@cluster0.5sfoj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+    const url = 'mongodb://localhost:27017/shop_phone'
     try {
         await mongoose.connect(url, {
             useNewUrlParser: true,

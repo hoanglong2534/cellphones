@@ -73,11 +73,10 @@
 .feature-item div {
     font-size: 1.1rem;
     line-height: 1.4;
+    color: rgba(255,255,255,0.95);
 }
 
-.feature-item strong {
-    color: #fbbf24;
-}
+.feature-item strong { color: #fde047; text-shadow: 0 1px 1px rgba(0,0,0,0.15); }
 
 .ar-cta-button {
     display: inline-block;
@@ -272,4 +271,9 @@
         padding: 0.8rem 2rem;
         font-size: 1rem;
     }
+}
+
+
+.blackText{
+    color: #000;
 }

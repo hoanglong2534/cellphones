@@ -4,6 +4,7 @@ import {AddToCart} from '../../actions/CartAction'
 import {Link} from 'react-router-dom'
 import {formatPrice} from '../../untils/index'
 import { message} from 'antd';
+import ImageWithFallback from '../ImageWithFallback';
 
 function Product(props) {
     const { product } = props;
@@ -33,7 +34,7 @@ function Product(props) {
     return (
         <div className="hotsale-listproduct-product">
             <Link to={"/detail/" + product._id}>
-                <img src={product.image}></img>
+                <ImageWithFallback src={product.image} alt={product.name} />
                 <p className="hotsale-listproduct-product-name">{product.name}</p>
                 <div className="price">
                     <span className="price1">{formatPrice(product.salePrice)}đ</span>

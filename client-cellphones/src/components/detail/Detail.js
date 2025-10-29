@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import './Detail.css'
 import DetailInfo from './DetailInfo'
 import RateStar from './RateStar';
@@ -6,40 +6,68 @@ import {
     useParams,
     Link
 } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
-import { getproductById } from '../../actions/ProductAction';
+import { useDispatch, useSelector as useReduxSelector } from 'react-redux';
+import { getproductById, getAllProduct } from '../../actions/ProductAction';
 import CommentProduct from './CommentProduct';
 import BlogContent from './BlogContent';
 import ARViewer from '../ARViewer/ARViewer';
+import ImageWithFallback from '../ImageWithFallback';
 import AIChatbot from '../AIChatbot/AIChatbot';
 
 function Detail(props) {
     const dispatch = useDispatch()
     const { id } = useParams();
-    const detailProduct = useSelector(state => state.getProductById.product)
+    const detailProduct = useReduxSelector(state => state.getProductById.product)
     const [selectedImage, setSelectedImage] = useState(0);
     const [activeTab, setActiveTab] = useState('description');
 
+    const allProducts = useReduxSelector(state => state.allProduct?.product || []);
+
     useEffect(() => {
         dispatch(getproductById(id))
-    }, [dispatch])
+    }, [dispatch, id])
 
-    // Mock data for additional images
-    const productImages = detailProduct ? [
-        detailProduct.image,
-        detailProduct.image,
-        detailProduct.image,
-        detailProduct.image
+    useEffect(() => {
+        if (!allProducts || allProducts.length === 0) {
+            dispatch(getAllProduct());
+        }
+    }, [dispatch, allProducts?.length])
+
+    // Build image array with unique items; if backend has gallery, prefer it
+    const rawImages = (detailProduct?.images && detailProduct.images.length)
+        ? detailProduct.images
+        : [detailProduct?.image].filter(Boolean);
+
+    const productImages = Array.from(new Set(rawImages)).slice(0, 8);
+    const hasThumbnails = productImages.length > 1;
+
+    // Lấy thông số kỹ thuật; nếu thiếu, dùng dữ liệu mặc định theo sản phẩm
+    const defaultSpecifications = detailProduct ? [
+        { label: 'Màn hình', value: detailProduct.screen || 'OLED 6.7" 120Hz' },
+        { label: 'Chip', value: detailProduct.cpu || 'A16 Bionic / Snapdragon 8 Gen 2' },
+        { label: 'RAM', value: (detailProduct.ram && `${detailProduct.ram} GB`) || '8 GB' },
+        { label: 'Bộ nhớ', value: (detailProduct.rom && `${detailProduct.rom} GB`) || '128 GB' },
+        { label: 'Camera', value: detailProduct.camera || 'Chính 48MP, Selfie 12MP' },
+        { label: 'Pin & Sạc', value: detailProduct.battery || '4500 mAh, sạc nhanh 65W' },
+        { label: 'Kết nối', value: '5G, Wi‑Fi 6/6E, Bluetooth 5.3, NFC' },
+        { label: 'Chống nước', value: 'IP68' }
     ] : [];
 
-    // Lấy thông số kỹ thuật từ backend thay vì mock data
-    const specifications = detailProduct?.specifications ? 
-        Object.entries(detailProduct.specifications).map(([label, value]) => ({
-            label,
-            value
-        })) : [];
+    const specifications = detailProduct?.specifications && Object.keys(detailProduct.specifications).length
+        ? Object.entries(detailProduct.specifications).map(([label, value]) => ({ label, value }))
+        : defaultSpecifications;
 
-    const features = detailProduct?.features || [];
+    const features = (detailProduct?.features && detailProduct.features.length)
+        ? detailProduct.features
+        : ['Màn hình mượt 120Hz', 'Camera chống rung OIS', 'Sạc nhanh', 'Bảo hành 12 tháng'];
+
+    const related = useMemo(() => {
+        const pool = (allProducts || []).filter(p => p && p._id !== detailProduct?._id);
+        if (!pool.length) return [];
+        // shuffle
+        const shuffled = [...pool].sort(() => Math.random() - 0.5);
+        return shuffled.slice(0, 4);
+    }, [allProducts, detailProduct?._id]);
 
     return (
         <section id="detail">
@@ -80,11 +108,12 @@ function Detail(props) {
                             {/* Image Gallery */}
                             <div className="image-gallery">
                                 <div className="main-image">
-                                    <img src={productImages[selectedImage]} alt={detailProduct.name} />
+                                    <ImageWithFallback src={productImages[selectedImage]} alt={detailProduct.name} />
                                     <div className="image-zoom">
                                         <span>🔍</span>
                                     </div>
                                 </div>
+                                {hasThumbnails && (
                                 <div className="thumbnail-images">
                                     {productImages.map((image, index) => (
                                         <div 
@@ -92,10 +121,11 @@ function Detail(props) {
                                             className={`thumbnail ${selectedImage === index ? 'active' : ''}`}
                                             onClick={() => setSelectedImage(index)}
                                         >
-                                            <img src={image} alt={`${detailProduct.name} ${index + 1}`} />
+                                            <ImageWithFallback src={image} alt={`${detailProduct.name} ${index + 1}`} />
                                         </div>
                                     ))}
                                 </div>
+                                )}
                             </div>
 
                             {/* Product Info */}
@@ -189,26 +219,36 @@ function Detail(props) {
                         <div className="container">
                             <h2 className="section-title">Sản phẩm liên quan</h2>
                             <div className="related-grid">
-                                {/* Mock related products - sẽ được thay thế bằng data từ backend */}
-                                {[1, 2, 3, 4].map(item => (
-                                    <Link key={item} to={`/detail/${item}`} className="related-card">
-                                        <div className="related-image">
-                                            <img src={detailProduct.image} alt="Related product" />
-                                            <div className="related-discount">-15%</div>
-                                        </div>
-                                        <div className="related-info">
-                                            <h3>iPhone 14 Pro Max</h3>
-                                            <div className="related-price">
-                                                <span className="current-price">25.990.000đ</span>
-                                                <span className="old-price">30.990.000đ</span>
+                                {related.length ? (
+                                    related.map(item => (
+                                        <Link key={item._id} to={`/detail/${item._id}`} className="related-card">
+                                            <div className="related-image">
+                                                <ImageWithFallback src={item.image} alt={item.name} />
+                                                {item.percentDiscount ? (
+                                                    <div className="related-discount">-{item.percentDiscount}%</div>
+                                                ) : null}
                                             </div>
-                                            <div className="related-rating">
-                                                <span className="stars">★★★★☆</span>
-                                                <span className="rating-count">(128)</span>
+                                            <div className="related-info">
+                                                <h3>{item.name}</h3>
+                                                <div className="related-price">
+                                                    <span className="current-price">{new Intl.NumberFormat('vi-VN').format(item.salePrice)}đ</span>
+                                                    <span className="old-price">{new Intl.NumberFormat('vi-VN').format(item.price)}đ</span>
+                                                </div>
+                                                <div className="related-rating">
+                                                    <span className="stars">★★★★☆</span>
+                                                    <span className="rating-count">({Math.floor(Math.random()*200)+10})</span>
+                                                </div>
                                             </div>
+                                        </Link>
+                                    ))
+                                ) : (
+                                    [1,2,3,4].map(idx => (
+                                        <div key={idx} className="related-card" style={{opacity:.6}}>
+                                            <div className="related-image" />
+                                            <div className="related-info"><h3>Đang tải...</h3></div>
                                         </div>
-                                    </Link>
-                                ))}
+                                    ))
+                                )}
                             </div>
                         </div>
                     </div>

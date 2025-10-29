@@ -4,6 +4,7 @@ import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import './BlogPage.css';
 import { blogPosts } from '../data/blogPosts';
+import ImageWithFallback from '../components/ImageWithFallback';
 
 function BlogDetailPage(){
   const { id } = useParams();
@@ -48,7 +49,7 @@ function BlogDetailPage(){
         <div className="container">
           <div className="content-wrapper">
             <article className="policy-card" style={{overflow: 'hidden'}}>
-              <img src={post.image} alt={post.title} style={{width:'100%', borderRadius: '12px', marginBottom: '1rem'}}/>
+              <ImageWithFallback src={post.image} alt={post.title} style={{width:'100%', borderRadius: '12px', marginBottom: '1rem'}}/>
               <div className="card-content">
                 <div className="post-content" dangerouslySetInnerHTML={{__html: post.content}}/>
               </div>

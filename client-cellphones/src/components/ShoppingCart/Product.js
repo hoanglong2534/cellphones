@@ -2,6 +2,7 @@ import React from 'react';
 import {formatPrice} from '../../untils/index'
 import { useDispatch } from 'react-redux'
 import {AddToCart, DeleteToCart, DeleteQtyProduct} from '../../actions/CartAction'
+import ImageWithFallback from '../ImageWithFallback';
 Product.propTypes = {
 
 };
@@ -29,7 +30,7 @@ function Product(props) {
         <div className="shopping-cart-list-product">
             <div className="shopping-cart-list-product-block">
                 <div className="shopping-cart-list-product-block-left">
-                    <img src={product.image}></img>
+                    <ImageWithFallback src={product.image} alt={product.name} />
                 </div>
                 <div className="shopping-cart-list-product-block-right">
                     <p className="product-name">

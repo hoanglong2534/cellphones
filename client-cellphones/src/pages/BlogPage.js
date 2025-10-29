@@ -4,6 +4,7 @@ import Footer from '../components/footer/Footer';
 import './BlogPage.css';
 import { blogPosts } from '../data/blogPosts';
 import { useHistory } from 'react-router-dom';
+import ImageWithFallback from '../components/ImageWithFallback';
 
 function BlogPage() {
     const [selectedCategory, setSelectedCategory] = useState('all');
@@ -49,7 +50,7 @@ function BlogPage() {
                         {featuredPosts.map(post => (
                             <article key={post.id} className="featured-card" onClick={() => openPost(post.id)} style={{cursor:'pointer'}}>
                                 <div className="card-image">
-                                    <img src={post.image} alt={post.title} />
+                                    <ImageWithFallback src={post.image} alt={post.title} />
                                     <div className="card-badge">Nổi Bật</div>
                                 </div>
                                 <div className="card-content">
@@ -95,7 +96,7 @@ function BlogPage() {
                         {filteredPosts.map(post => (
                             <article key={post.id} className="post-card">
                                 <div className="post-image">
-                                    <img src={post.image} alt={post.title} />
+                                    <ImageWithFallback src={post.image} alt={post.title} />
                                     <div className="post-category">
                                         {categories.find(c => c.id === post.category)?.name}
                                     </div>

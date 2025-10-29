@@ -50,6 +50,12 @@ p{
 }
 .hotsale-listproduct-product-name{
     height: 80px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
 }
 .hotsale-listproduct-product:hover{
     box-sizing: border-box;
@@ -57,9 +63,12 @@ p{
     transition: 0.5s; 
 }
 
-.hotsale-listproduct-product img {
+.hotsale-listproduct-product img,
+.hotsale-listproduct-product img[class^="ImageWithFallback"],
+.hotsale-listproduct-product img[class*=" ImageWithFallback"] {
     width: 150px;
     height: 150px;
+    object-fit: contain;
 }
 .hotsale-listproduct-product:hover img{
     transform: scale(1.05);

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import ARViewer from '../components/ARViewer/ARViewer';
+import ImageWithFallback from '../components/ImageWithFallback';
 import { mockProductsWithAR } from '../data/mockARProducts';
 import './ARPage.css';
 
@@ -15,6 +16,7 @@ const ARPage = () => {
     return (
         <div className="ar-page">
             <Header />
+
 
             <div className="ar-page-header">
                 <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
@@ -30,6 +32,9 @@ const ARPage = () => {
                 </div>
             </div>
 
+            {/* Removed hero/header for a cleaner, compact layout */}
+
+
             {/* Product Selection */}
             <div className="product-selection">
                 <div className="container">
@@ -41,7 +46,7 @@ const ARPage = () => {
                                 className={`product-card ${selectedProduct.id === product.id ? 'active' : ''}`}
                                 onClick={() => setSelectedProduct(product)}
                             >
-                                <img src={product.image} alt={product.name} />
+                                <ImageWithFallback src={product.image} alt={product.name} />
                                 <h3>{product.name}</h3>
                                 <p>{product.price.toLocaleString('vi-VN')}₫</p>
                                 {product.modelUrl && (

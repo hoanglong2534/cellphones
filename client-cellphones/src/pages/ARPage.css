@@ -1,9 +1,8 @@
 .ar-page {
-    padding: 2rem 1rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 0;
     min-height: 100vh;
 }
+.ar-page .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-md); }
 
 .ar-page-header {
     text-align: center;
@@ -100,10 +99,6 @@
 
 .ar-viewer-section {
     margin: 3rem 0;
-    background: white;
-    border-radius: 15px;
-    padding: 2rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
 .instructions-section {

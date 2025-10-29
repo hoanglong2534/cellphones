@@ -107,11 +107,13 @@
 
 .store-content { padding: var(--space-xl); }
 
-.store-name { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: var(--space-md); line-height: 1.3; }
+.store-name { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: var(--space-md); line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
 .store-address,
 .store-phone,
 .store-hours { color: var(--text-secondary); margin-bottom: var(--space-sm); font-size: 0.95rem; }
+
+.store-address { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
 .store-rating { display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-lg); }
 
@@ -169,6 +171,8 @@
     cursor: pointer;
     transition: all var(--transition-normal);
     min-width: 120px;
+    text-decoration: none;
+    text-align: center;
 }
 
 .directions-btn {

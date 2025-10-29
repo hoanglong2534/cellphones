@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import './AboutPage.css';
+import ImageWithFallback from '../components/ImageWithFallback';
 
 function AboutPage() {
     return (
@@ -39,10 +40,7 @@ function AboutPage() {
                             </p>
                         </div>
                         <div className="story-image">
-                            <div className="image-placeholder">
-                                <span>🏢</span>
-                                <p>Cửa hàng đầu tiên tại Hà Nội</p>
-                            </div>
+                            <ImageWithFallback src="https://images.unsplash.com/photo-1540574163026-643ea20ade25?q=80&w=1200&auto=format&fit=crop" alt="Cửa hàng đầu tiên tại Hà Nội" />
                         </div>
                     </div>
                 </div>
@@ -152,13 +150,13 @@ function AboutPage() {
                         <div className="contact-item">
                             <div className="contact-icon">📧</div>
                             <h4>Email</h4>
-                            <p>support@plstore.vn</p>
+                            <p><a href="mailto:support@plstore.vn">support@plstore.vn</a></p>
                             <span>Phản hồi trong 24h</span>
                         </div>
                         <div className="contact-item">
                             <div className="contact-icon">📍</div>
                             <h4>Địa Chỉ</h4>
-                            <p>123 Nguyễn Huệ, Q1, TP.HCM</p>
+                            <p>01 Duy Tân, Cầu Giấy, Hà Nội</p>
                             <span>Trụ sở chính</span>
                         </div>
                     </div>

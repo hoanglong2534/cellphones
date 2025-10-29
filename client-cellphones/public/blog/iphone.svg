@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eef2ff"/>
+      <stop offset="100%" stop-color="#dbeafe"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#bg)"/>
+  <g transform="translate(820,120)" opacity="0.15">
+    <rect x="0" y="0" rx="36" ry="36" width="240" height="360" fill="#1e40af"/>
+    <circle cx="120" cy="24" r="6" fill="#93c5fd"/>
+    <rect x="90" y="330" width="60" height="8" rx="4" fill="#93c5fd"/>
+  </g>
+  <g transform="translate(140,80)">
+    <text x="0" y="0" font-family="Inter,Segoe UI,Roboto,Arial" font-size="54" font-weight="800" fill="#1f2937">iPhone 15 Pro Max</text>
+    <text x="0" y="60" font-family="Inter,Segoe UI,Roboto,Arial" font-size="28" fill="#334155">Đánh giá & trải nghiệm thực tế</text>
+  </g>
+  <g transform="translate(140,180)" fill="#1e40af" opacity="0.9">
+    <rect x="0" y="0" width="260" height="10" rx="5"/>
+    <rect x="0" y="26" width="220" height="10" rx="5"/>
+    <rect x="0" y="52" width="180" height="10" rx="5"/>
+  </g>
+</svg>

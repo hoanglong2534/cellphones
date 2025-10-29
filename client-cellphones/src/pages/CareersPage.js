@@ -5,6 +5,9 @@ import './CareersPage.css';
 
 function CareersPage() {
     const [selectedDepartment, setSelectedDepartment] = useState('all');
+    const [showApplyModal, setShowApplyModal] = useState(false);
+    const [selectedJob, setSelectedJob] = useState(null);
+    const [cvFile, setCvFile] = useState(null);
 
     const departments = [
         { id: 'all', name: 'Tất Cả' },
@@ -248,7 +251,7 @@ function CareersPage() {
                                 </div>
 
                                 <div className="job-actions">
-                                    <button className="apply-btn">Ứng Tuyển Ngay</button>
+                                    <button className="apply-btn" onClick={() => { setSelectedJob(job); setShowApplyModal(true); }}>Ứng Tuyển Ngay</button>
                                     <button className="save-btn">Lưu Việc Làm</button>
                                 </div>
                             </div>
@@ -314,6 +317,37 @@ function CareersPage() {
                     </div>
                 </div>
             </section>
+
+            {/* Apply Modal */}
+            {showApplyModal && (
+                <div className="apply-modal-overlay" onClick={() => setShowApplyModal(false)}>
+                    <div className="apply-modal" onClick={(e) => e.stopPropagation()}>
+                        <h3>Nộp CV - {selectedJob?.title}</h3>
+                        <p>Chỉ nhận file PDF, tối đa 5MB.</p>
+                        <input
+                            type="file"
+                            accept="application/pdf"
+                            onChange={(e) => setCvFile(e.target.files && e.target.files[0] ? e.target.files[0] : null)}
+                        />
+                        <div className="modal-actions">
+                            <button className="save-btn" onClick={() => setShowApplyModal(false)}>Huỷ</button>
+                            <button
+                                className="apply-btn"
+                                onClick={() => {
+                                    if (!cvFile) { alert('Vui lòng chọn file PDF'); return; }
+                                    if (cvFile.type !== 'application/pdf') { alert('Chỉ chấp nhận PDF'); return; }
+                                    if (cvFile.size > 5 * 1024 * 1024) { alert('File vượt quá 5MB'); return; }
+                                    alert('Đã gửi CV thành công!');
+                                    setCvFile(null);
+                                    setShowApplyModal(false);
+                                }}
+                            >
+                                Gửi CV
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             <Footer />
         </div>

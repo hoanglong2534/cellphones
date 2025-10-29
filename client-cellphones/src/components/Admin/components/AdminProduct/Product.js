@@ -7,6 +7,7 @@ import {
 import { useHistory, Link } from "react-router-dom";
 import { formatPrice } from "../../../../untils/index";
 import { DeleteOutlined, EditOutlined, FormOutlined } from "@ant-design/icons";
+import ImageWithFallback from "../../../ImageWithFallback";
 
 
 function Product(props) {
@@ -23,7 +24,7 @@ function Product(props) {
     <tr>
       <td>{number + 1}</td>
       <td>
-        <img src={product.image}></img>
+        <ImageWithFallback src={product.image} alt={product.name} />
       </td>
       <td>{product.name}</td>
       <td>{formatPrice(product.salePrice)}</td>
