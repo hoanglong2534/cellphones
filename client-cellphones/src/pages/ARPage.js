@@ -22,7 +22,11 @@ const ARPage = () => {
                         <h1>🚀 Trải nghiệm AR/VR</h1>
                         <p>Khám phá sản phẩm với công nghệ thực tế tăng cường và thực tế ảo</p>
                     </div>
-                    <Link to="/" className="btn btn-secondary">← Về trang chủ</Link>
+                    <div style={{ display: 'grid', gap: 8, gridAutoFlow: 'column' }}>
+                        <Link to="/ar-model-viewer" className="btn btn-primary">AR nhanh (model-viewer)</Link>
+                        <Link to="/ar-webxr" className="btn btn-primary">Thử WebXR (mới)</Link>
+                        <Link to="/" className="btn btn-secondary">← Về trang chủ</Link>
+                    </div>
                 </div>
             </div>
 
