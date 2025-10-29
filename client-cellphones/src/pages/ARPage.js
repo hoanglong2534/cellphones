@@ -17,7 +17,23 @@ const ARPage = () => {
         <div className="ar-page">
             <Header />
 
+
+            <div className="ar-page-header">
+                <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
+                    <div>
+                        <h1>🚀 Trải nghiệm AR/VR</h1>
+                        <p>Khám phá sản phẩm với công nghệ thực tế tăng cường và thực tế ảo</p>
+                    </div>
+                    <div style={{ display: 'grid', gap: 8, gridAutoFlow: 'column' }}>
+                        <Link to="/ar-model-viewer" className="btn btn-primary">AR nhanh (model-viewer)</Link>
+                        <Link to="/ar-webxr" className="btn btn-primary">Thử WebXR (mới)</Link>
+                        <Link to="/" className="btn btn-secondary">← Về trang chủ</Link>
+                    </div>
+                </div>
+            </div>
+
             {/* Removed hero/header for a cleaner, compact layout */}
+
 
             {/* Product Selection */}
             <div className="product-selection">
